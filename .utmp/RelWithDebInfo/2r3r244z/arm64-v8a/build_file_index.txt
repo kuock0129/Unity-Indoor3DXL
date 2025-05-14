@@ -1,0 +1,2 @@
+C:\Users\kuock\Unity\UnityMRStarterForQuest\StarterWithMRTK2_8\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\kuock\Unity\UnityMRStarterForQuest\StarterWithMRTK2_8\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\FramePacing\CMakeLists.txt

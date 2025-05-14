@@ -1,0 +1,1 @@
+C:\Users\kuock\Unity\UnityMRStarterForQuest\StarterWithMRTK2_8\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\2r3r244z\obj\arm64-v8a
