@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: KevinKuo
-  productName: Indoor3DXR
+  productName: Indoor3DXv7
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -82,7 +82,7 @@ PlayerSettings:
   androidApplicationEntry: 2
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
-  runInBackground: 0
+  runInBackground: 1
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
   Force IOS Speakers When Recording: 0
@@ -167,7 +167,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.KevinKuo.Indoor3DXR
+    Android: com.KevinKuo.Indoor3DXv7
     Standalone: com.VRChallenge.VRStarter
   buildNumber:
     Standalone: 0
@@ -744,8 +744,9 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: OCULUSINTEGRATION_PRESENT
     7: OCULUSINTEGRATION_PRESENT
-    Android: OCULUSINTEGRATION_PRESENT
-    Standalone: OCULUSINTEGRATION_PRESENT
+    Android: OCULUSINTEGRATION_PRESENT;USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
+    Standalone: OCULUSINTEGRATION_PRESENT;USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
+    Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
