@@ -596,7 +596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264292611255992059, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: 0.84
       objectReference: {fileID: 0}
     - target: {fileID: 5264292611255992059, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -636,7 +636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264292612263438826, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_text
-      value: 3D Reconstuction
+      value: 3D Rec
       objectReference: {fileID: 0}
     - target: {fileID: 5264292612263438826, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_textAlignment
