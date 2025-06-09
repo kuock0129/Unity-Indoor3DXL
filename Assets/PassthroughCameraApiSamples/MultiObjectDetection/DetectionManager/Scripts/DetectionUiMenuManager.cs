@@ -20,6 +20,7 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         [SerializeField] private GameObject m_noPermissionPanel;
         [SerializeField] private Text m_labelInfromation;
         [SerializeField] private AudioSource m_buttonSound;
+        [SerializeField] private GameObject m_pressableButton;
 
         public bool IsInputActive { get; set; } = false;
 
@@ -39,7 +40,11 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         {
             m_initialPanel.SetActive(false);
             m_noPermissionPanel.SetActive(false);
+            m_pressableButton.SetActive(false);
             m_loadingPanel.SetActive(true);
+
+            IsInputActive = true;
+
             // Wait until Sentis model is loaded
             var sentisInference = FindFirstObjectByType<SentisInferenceRunManager>();
             while (!sentisInference.IsModelLoaded)
@@ -52,9 +57,14 @@ namespace PassthroughCameraSamples.MultiObjectDetection
             {
                 yield return null;
             }
+
             if (PassthroughCameraPermissions.HasCameraPermission == false)
             {
                 OnNoPermissionMenu();
+            }
+            else
+            {
+                OnInitialMenu(true);  // Assuming you want to check for scene permission here
             }
         }
 
@@ -76,6 +86,7 @@ namespace PassthroughCameraSamples.MultiObjectDetection
             m_initialMenu = false;
             IsPaused = true;
             m_initialPanel.SetActive(false);
+            m_pressableButton.SetActive(false);
             m_noPermissionPanel.SetActive(true);
         }
         #endregion
@@ -88,7 +99,9 @@ namespace PassthroughCameraSamples.MultiObjectDetection
             {
                 m_initialMenu = true;
                 IsPaused = true;
+                IsInputActive = true;
                 m_initialPanel.SetActive(true);
+                m_pressableButton.SetActive(true);
                 m_noPermissionPanel.SetActive(false);
             }
             else
@@ -113,6 +126,7 @@ namespace PassthroughCameraSamples.MultiObjectDetection
 
             m_initialPanel.SetActive(false);
             m_noPermissionPanel.SetActive(false);
+            m_pressableButton.SetActive(true);
 
             OnPause?.Invoke(visible);
         }
@@ -121,7 +135,7 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         #region Ui state: detection information
         private void UpdateLabelInformation()
         {
-            m_labelInfromation.text = $"Unity Sentis version: 2.1.1\nAI model: Yolo\nDetecting objects: {m_objectsDetected}\nObjects identified: {m_objectsIdentified}";
+            m_labelInfromation.text = $"Unity Sentis version: 2.1.1\nAI model: Yolo\nDetecting objects: {m_objectsDetected}\n";
         }
 
         public void OnObjectsDetected(int objects)

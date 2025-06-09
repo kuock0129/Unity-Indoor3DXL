@@ -199,9 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4093808205752232741, guid: daa0726e9f4321044bc455f2849304f1, type: 3}
       propertyPath: m_text
-      value: 'Line One
-
-        Line Two'
+      value: 3D
       objectReference: {fileID: 0}
     - target: {fileID: 4093808205752232741, guid: daa0726e9f4321044bc455f2849304f1, type: 3}
       propertyPath: m_margin.y

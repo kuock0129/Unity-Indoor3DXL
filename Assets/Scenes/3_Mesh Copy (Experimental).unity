@@ -277,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2279054344620247711, guid: 259c0c899b7e0c14aa431eefdc0aacc6, type: 3}
       propertyPath: m_Text
-      value: Click Button to reconstrct the 3D Model.
+      value: Press Button to reconstrct the 3D Model.
       objectReference: {fileID: 0}
     - target: {fileID: 2447241005283040037, guid: 259c0c899b7e0c14aa431eefdc0aacc6, type: 3}
       propertyPath: m_Text
@@ -312,6 +312,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -448
       objectReference: {fileID: 0}
+    - target: {fileID: 5846769668076299689, guid: 259c0c899b7e0c14aa431eefdc0aacc6, type: 3}
+      propertyPath: m_pressableButton
+      value: 
+      objectReference: {fileID: 1885126219}
     - target: {fileID: 5846769668076299689, guid: 259c0c899b7e0c14aa431eefdc0aacc6, type: 3}
       propertyPath: OnPause.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -575,12 +579,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4196636372085809879, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+      propertyPath: m_text
+      value: '3D '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196636372085809879, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_textAlignment
       value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 4196636372085809879, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_VerticalAlignment
       value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196636372085809879, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5264292611224294582, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_IsActive
@@ -591,16 +603,28 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5264292611255992059, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264292611255992059, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264292611255992059, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264292611255992059, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5264292611255992059, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.84
+      value: 0.862
       objectReference: {fileID: 0}
     - target: {fileID: 5264292611255992059, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6
+      value: 0.6671
       objectReference: {fileID: 0}
     - target: {fileID: 5264292611255992059, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -636,7 +660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264292612263438826, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_text
-      value: 3D Rec
+      value: Press
       objectReference: {fileID: 0}
     - target: {fileID: 5264292612263438826, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_textAlignment
@@ -675,7 +699,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3336479786215724729, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
   m_PrefabInstance: {fileID: 380886951}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1885126219}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1410eac1ae94b4d4492a09cc368e152c, type: 3}
@@ -2168,6 +2192,11 @@ Transform:
   - {fileID: 1005094109}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1885126219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5264292612850350106, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+  m_PrefabInstance: {fileID: 380886951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2015614901
 GameObject:
   m_ObjectHideFlags: 0
