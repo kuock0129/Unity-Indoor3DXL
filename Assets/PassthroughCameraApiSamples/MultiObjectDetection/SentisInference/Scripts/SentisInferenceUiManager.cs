@@ -21,7 +21,21 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         [SerializeField] private SentisObjectDetectedUiManager m_detectionCanvas;
         [SerializeField] private RawImage m_displayImage;
         [SerializeField] private Sprite m_boxTexture;
-        [SerializeField] private Color m_boxColor;
+        //[SerializeField] private Color m_boxColor;
+        [SerializeField] private Color m_furnitureColor = Color.cyan;
+        [SerializeField] private Color m_electronicsColor = Color.blue;
+        [SerializeField] private Color m_foodColor = Color.green;
+        [SerializeField] private Color m_animalColor = Color.yellow;
+        [SerializeField] private Color m_vehicleColor = Color.magenta;
+        [SerializeField] private Color m_personColor = Color.red;
+        [SerializeField] private Color m_accessoryColor = Color.gray;
+        //[SerializeField] private Color m_sportsColor = Color.orange;
+        [SerializeField] private Color m_sportsColor = new Color(1f, 0.5f, 0f); // orange
+        [SerializeField] private Color m_utensilColor = Color.white;
+        [SerializeField] private Color m_trafficColor = Color.black;
+        //[SerializeField] private Color m_miscColor = Color.brown;
+        [SerializeField] private Color m_miscColor = new Color(0.6f, 0.3f, 0f); // brown
+        [SerializeField] private Color m_defaultColor = Color.white;
         [SerializeField] private Font m_font;
         [SerializeField] private Color m_fontColor;
         [SerializeField] private int m_fontSize = 80;
@@ -33,6 +47,9 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         private string[] m_labels;
         private List<GameObject> m_boxPool = new();
         private Transform m_displayLocation;
+
+        // Dictionary for better color management
+        private Dictionary<string, Color> m_categoryColors;
 
         //bounding box data
         public struct BoundingBox
@@ -50,6 +67,7 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         private void Start()
         {
             m_displayLocation = m_displayImage.transform;
+            InitializeCategoryColors();
         }
         #endregion
 
@@ -75,6 +93,140 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         {
             m_displayImage.texture = image;
             m_detectionCanvas.CapturePosition();
+        }
+
+        private void InitializeCategoryColors()
+        {
+            m_categoryColors = new Dictionary<string, Color>();
+
+            // Person
+            m_categoryColors["person"] = m_personColor;
+
+            // Vehicles
+            m_categoryColors["bicycle"] = m_vehicleColor;
+            m_categoryColors["car"] = m_vehicleColor;
+            m_categoryColors["motorbike"] = m_vehicleColor;
+            m_categoryColors["aeroplane"] = m_vehicleColor;
+            m_categoryColors["bus"] = m_vehicleColor;
+            m_categoryColors["train"] = m_vehicleColor;
+            m_categoryColors["truck"] = m_vehicleColor;
+            m_categoryColors["boat"] = m_vehicleColor;
+
+            // Traffic
+            m_categoryColors["traffic light"] = m_trafficColor;
+            m_categoryColors["fire hydrant"] = m_trafficColor;
+            m_categoryColors["stop sign"] = m_trafficColor;
+            m_categoryColors["parking meter"] = m_trafficColor;
+
+            // Animals
+            m_categoryColors["bird"] = m_animalColor;
+            m_categoryColors["cat"] = m_animalColor;
+            m_categoryColors["dog"] = m_animalColor;
+            m_categoryColors["horse"] = m_animalColor;
+            m_categoryColors["sheep"] = m_animalColor;
+            m_categoryColors["cow"] = m_animalColor;
+            m_categoryColors["elephant"] = m_animalColor;
+            m_categoryColors["bear"] = m_animalColor;
+            m_categoryColors["zebra"] = m_animalColor;
+            m_categoryColors["giraffe"] = m_animalColor;
+
+            // Accessories
+            m_categoryColors["backpack"] = m_accessoryColor;
+            m_categoryColors["umbrella"] = m_accessoryColor;
+            m_categoryColors["handbag"] = m_accessoryColor;
+            m_categoryColors["tie"] = m_accessoryColor;
+            m_categoryColors["suitcase"] = m_accessoryColor;
+            m_categoryColors["toothbrush"] = m_accessoryColor;
+
+            // Sports
+            m_categoryColors["frisbee"] = m_sportsColor;
+            m_categoryColors["skis"] = m_sportsColor;
+            m_categoryColors["snowboard"] = m_sportsColor;
+            m_categoryColors["sports ball"] = m_sportsColor;
+            m_categoryColors["kite"] = m_sportsColor;
+            m_categoryColors["baseball bat"] = m_sportsColor;
+            m_categoryColors["baseball glove"] = m_sportsColor;
+            m_categoryColors["skateboard"] = m_sportsColor;
+            m_categoryColors["surfboard"] = m_sportsColor;
+            m_categoryColors["tennis racket"] = m_sportsColor;
+
+            // Food & Drink
+            m_categoryColors["bottle"] = m_foodColor;
+            m_categoryColors["wine glass"] = m_foodColor;
+            m_categoryColors["cup"] = m_foodColor;
+            m_categoryColors["bowl"] = m_foodColor;
+            m_categoryColors["banana"] = m_foodColor;
+            m_categoryColors["apple"] = m_foodColor;
+            m_categoryColors["sandwich"] = m_foodColor;
+            m_categoryColors["orange"] = m_foodColor;
+            m_categoryColors["broccoli"] = m_foodColor;
+            m_categoryColors["carrot"] = m_foodColor;
+            m_categoryColors["hot dog"] = m_foodColor;
+            m_categoryColors["pizza"] = m_foodColor;
+            m_categoryColors["donut"] = m_foodColor;
+            m_categoryColors["cake"] = m_foodColor;
+
+            // Utensils
+            m_categoryColors["fork"] = m_utensilColor;
+            m_categoryColors["knife"] = m_utensilColor;
+            m_categoryColors["spoon"] = m_utensilColor;
+
+            // Furniture
+            m_categoryColors["chair"] = m_furnitureColor;
+            m_categoryColors["sofa"] = m_furnitureColor;
+            m_categoryColors["bed"] = m_furnitureColor;
+            m_categoryColors["diningtable"] = m_furnitureColor;
+            m_categoryColors["toilet"] = m_furnitureColor;
+            m_categoryColors["bench"] = m_furnitureColor;
+
+            // Electronics
+            m_categoryColors["tvmonitor"] = m_electronicsColor;
+            m_categoryColors["laptop"] = m_electronicsColor;
+            m_categoryColors["mouse"] = m_electronicsColor;
+            m_categoryColors["remote"] = m_electronicsColor;
+            m_categoryColors["keyboard"] = m_electronicsColor;
+            m_categoryColors["cell phone"] = m_electronicsColor;
+            m_categoryColors["microwave"] = m_electronicsColor;
+            m_categoryColors["oven"] = m_electronicsColor;
+            m_categoryColors["toaster"] = m_electronicsColor;
+            m_categoryColors["sink"] = m_electronicsColor;
+            m_categoryColors["refrigerator"] = m_electronicsColor;
+            m_categoryColors["hair drier"] = m_electronicsColor;
+
+            // Miscellaneous
+            m_categoryColors["pottedplant"] = m_miscColor;
+            m_categoryColors["book"] = m_miscColor;
+            m_categoryColors["clock"] = m_miscColor;
+            m_categoryColors["vase"] = m_miscColor;
+            m_categoryColors["scissors"] = m_miscColor;
+            m_categoryColors["teddy bear"] = m_miscColor;
+        }
+
+        private Color GetCategoryColor(string className)
+        {
+            if (string.IsNullOrEmpty(className))
+            {
+                Debug.Log("Empty or null class name detected, using default color");
+                return m_defaultColor;
+            }
+
+            // Log the original class name for debugging
+            Debug.Log($"Detected class name: '{className}'");
+
+            // Clean the class name - remove underscores, convert to lowercase, trim whitespace
+            string cleanClassName = className.ToLower().Replace("_", " ").Trim();
+            Debug.Log($"Cleaned class name: '{cleanClassName}'");
+
+            // Try exact match first
+            if (m_categoryColors.ContainsKey(cleanClassName))
+            {
+                Color foundColor = m_categoryColors[cleanClassName];
+                Debug.Log($"Found exact match for '{cleanClassName}', using color: {foundColor}");
+                return foundColor;
+            }
+
+            Debug.Log($"No color match found for class '{className}' (cleaned: '{cleanClassName}'), using default color: {m_defaultColor}");
+            return m_defaultColor;
         }
 
         public void DrawUIBoxes(Tensor<float> output, Tensor<int> labelIDs, float imageWidth, float imageHeight)
@@ -163,17 +315,23 @@ namespace PassthroughCameraSamples.MultiObjectDetection
                 panel = m_boxPool[id];
                 if (panel == null)
                 {
-                    panel = CreateNewBox(m_boxColor);
+                    panel = CreateNewBox(GetCategoryColor(box.ClassName));
+
                 }
                 else
                 {
                     panel.SetActive(true);
+                    // Update color for reused panels
+                    var img = panel.GetComponent<Image>();
+                    if (img != null) img.color = GetCategoryColor(box.ClassName);
                 }
             }
             else
             {
-                panel = CreateNewBox(m_boxColor);
+                panel = CreateNewBox(GetCategoryColor(box.ClassName));
+
             }
+
             //Set box position
             panel.transform.localPosition = new Vector3(box.CenterX, -box.CenterY, box.WorldPos.HasValue ? box.WorldPos.Value.z : 0.0f);
             //Set box rotation
