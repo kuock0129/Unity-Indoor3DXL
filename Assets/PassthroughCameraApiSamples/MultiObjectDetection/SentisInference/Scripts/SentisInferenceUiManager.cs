@@ -22,12 +22,12 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         [SerializeField] private RawImage m_displayImage;
         [SerializeField] private Sprite m_boxTexture;
         //[SerializeField] private Color m_boxColor;
-        [SerializeField] private Color m_furnitureColor = Color.cyan;
-        [SerializeField] private Color m_electronicsColor = Color.blue;
+        [SerializeField] private Color m_furnitureColor = Color.blue;
+        [SerializeField] private Color m_electronicsColor = Color.cyan;
         [SerializeField] private Color m_foodColor = Color.green;
         [SerializeField] private Color m_animalColor = Color.yellow;
-        [SerializeField] private Color m_vehicleColor = Color.magenta;
-        [SerializeField] private Color m_personColor = Color.red;
+        [SerializeField] private Color m_vehicleColor = Color.red;
+        [SerializeField] private Color m_personColor = Color.magenta;
         [SerializeField] private Color m_accessoryColor = Color.gray;
         //[SerializeField] private Color m_sportsColor = Color.orange;
         [SerializeField] private Color m_sportsColor = new Color(1f, 0.5f, 0f); // orange
@@ -308,6 +308,9 @@ namespace PassthroughCameraSamples.MultiObjectDetection
 
         private void DrawBox(BoundingBox box, int id)
         {
+            // Get the category color for both box and label
+            Color categoryColor = GetCategoryColor(box.ClassName);
+
             //Create the bounding box graphic or get from pool
             GameObject panel;
             if (id < m_boxPool.Count)
@@ -315,7 +318,7 @@ namespace PassthroughCameraSamples.MultiObjectDetection
                 panel = m_boxPool[id];
                 if (panel == null)
                 {
-                    panel = CreateNewBox(GetCategoryColor(box.ClassName));
+                    panel = CreateNewBox(categoryColor);
 
                 }
                 else
@@ -323,12 +326,16 @@ namespace PassthroughCameraSamples.MultiObjectDetection
                     panel.SetActive(true);
                     // Update color for reused panels
                     var img = panel.GetComponent<Image>();
-                    if (img != null) img.color = GetCategoryColor(box.ClassName);
+                    if (img != null) img.color = categoryColor;
+
+                    // Update label color to match box color
+                    var labelComponent = panel.GetComponentInChildren<Text>();
+                    if (labelComponent != null) labelComponent.color = categoryColor;
                 }
             }
             else
             {
-                panel = CreateNewBox(GetCategoryColor(box.ClassName));
+                panel = CreateNewBox(categoryColor);
 
             }
 
@@ -339,10 +346,11 @@ namespace PassthroughCameraSamples.MultiObjectDetection
             //Set box size
             var rt = panel.GetComponent<RectTransform>();
             rt.sizeDelta = new Vector2(box.Width, box.Height);
-            //Set label text
+            //Set label text and color
             var label = panel.GetComponentInChildren<Text>();
             label.text = box.Label;
             label.fontSize = 12;
+            label.color = categoryColor; // Set label color to match box color
         }
 
         private GameObject CreateNewBox(Color color)
@@ -363,7 +371,7 @@ namespace PassthroughCameraSamples.MultiObjectDetection
             text.transform.SetParent(panel.transform, false);
             var txt = text.AddComponent<Text>();
             txt.font = m_font;
-            txt.color = m_fontColor;
+            txt.color = color; // Use the same color as the box
             txt.fontSize = m_fontSize;
             txt.horizontalOverflow = HorizontalWrapMode.Overflow;
 
