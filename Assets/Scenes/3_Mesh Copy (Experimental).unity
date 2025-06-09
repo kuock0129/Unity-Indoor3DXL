@@ -580,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4196636372085809879, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_text
-      value: '3D '
+      value: "3D \nRec"
       objectReference: {fileID: 0}
     - target: {fileID: 4196636372085809879, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_textAlignment
@@ -658,9 +658,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5264292612263438825, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0017
+      objectReference: {fileID: 0}
     - target: {fileID: 5264292612263438826, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_text
       value: Press
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264292612263438826, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+      propertyPath: m_fontSize
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264292612263438826, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5264292612263438826, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_textAlignment
@@ -685,6 +697,10 @@ PrefabInstance:
     - target: {fileID: 5264292612850350106, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
       propertyPath: m_Name
       value: PressableButtonHoloLens2TextOnlyNumber_48x48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053523725073974465, guid: 33a8bc5dbea86e34583d3c38840a822d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0103
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
