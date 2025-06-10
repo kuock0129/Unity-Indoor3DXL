@@ -52,7 +52,8 @@ public class FurnitureSpawner : MonoBehaviour
 
             // Special case 01: Has only top plane
             if (_classification.Contains(OVRSceneManager.Classification.Table) ||
-                _classification.Contains(OVRSceneManager.Classification.Couch))
+                _classification.Contains(OVRSceneManager.Classification.Couch) ||
+                _classification.Contains(OVRSceneManager.Classification.Bed))
             {
                 GetVolumeFromTopPlane(
                     transform,
