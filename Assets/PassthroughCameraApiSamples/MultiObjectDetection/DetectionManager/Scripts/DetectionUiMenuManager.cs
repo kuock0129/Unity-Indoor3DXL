@@ -18,15 +18,19 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         [SerializeField] private GameObject m_loadingPanel;
         [SerializeField] private GameObject m_initialPanel;
         [SerializeField] private GameObject m_noPermissionPanel;
+        [SerializeField] private GameObject m_selectObjectPanel;      // NEW
+        [SerializeField] private GameObject m_scaleObjectPanel;       // NEW
         [SerializeField] private Text m_labelInfromation;
         [SerializeField] private AudioSource m_buttonSound;
-        [SerializeField] private GameObject m_pressableButton;
 
         public bool IsInputActive { get; set; } = false;
 
         public UnityEvent<bool> OnPause;
 
+        // Menu state flags
         private bool m_initialMenu;
+        private bool m_selectObjectMenu;     // MISSING - Added
+        private bool m_scaleObjectMenu;      // MISSING - Added
 
         // start menu
         private int m_objectsDetected = 0;
@@ -38,9 +42,11 @@ namespace PassthroughCameraSamples.MultiObjectDetection
         #region Unity Functions
         private IEnumerator Start()
         {
+            // Hide all panels initially
             m_initialPanel.SetActive(false);
             m_noPermissionPanel.SetActive(false);
-            m_pressableButton.SetActive(false);
+            m_selectObjectPanel.SetActive(false);
+            m_scaleObjectPanel.SetActive(false);
             m_loadingPanel.SetActive(true);
 
             IsInputActive = true;
@@ -77,16 +83,30 @@ namespace PassthroughCameraSamples.MultiObjectDetection
             {
                 InitialMenuUpdate();
             }
+            else if (m_selectObjectMenu)
+            {
+                SelectObjectMenuUpdate();
+            }
+            else if (m_scaleObjectMenu)
+            {
+                ScaleObjectMenuUpdate();
+            }
         }
         #endregion
 
         #region Ui state: No permissions Menu
         private void OnNoPermissionMenu()
         {
+            // Reset all menu states
             m_initialMenu = false;
+            m_selectObjectMenu = false;
+            m_scaleObjectMenu = false;
             IsPaused = true;
+
+            // Hide all panels except no permission
             m_initialPanel.SetActive(false);
-            m_pressableButton.SetActive(false);
+            m_selectObjectPanel.SetActive(false);
+            m_scaleObjectPanel.SetActive(false);
             m_noPermissionPanel.SetActive(true);
         }
         #endregion
@@ -97,12 +117,19 @@ namespace PassthroughCameraSamples.MultiObjectDetection
             // Check if we have the Scene data permission
             if (hasScenePermission)
             {
+                // Set menu states
                 m_initialMenu = true;
+                m_selectObjectMenu = false;
+                m_scaleObjectMenu = false;
                 IsPaused = true;
                 IsInputActive = true;
+
+                // Show only initial panel
                 m_initialPanel.SetActive(true);
-                m_pressableButton.SetActive(true);
+                m_selectObjectPanel.SetActive(false);
+                m_scaleObjectPanel.SetActive(false);
                 m_noPermissionPanel.SetActive(false);
+                m_loadingPanel.SetActive(false);
             }
             else
             {
@@ -112,23 +139,89 @@ namespace PassthroughCameraSamples.MultiObjectDetection
 
         private void InitialMenuUpdate()
         {
-            if (OVRInput.GetUp(m_actionButton) || Input.GetKey(KeyCode.Return))
+            if (OVRInput.GetUp(m_actionButton) || Input.GetKeyUp(KeyCode.Return))
             {
                 m_buttonSound?.Play();
-                OnPauseMenu(false);
+                OnSelectObjectMenu();  // FIXED: Changed from OnPauseMenu(false)
+            }
+        }
+        #endregion
+
+        #region Ui state: Select Object Menu
+        private void OnSelectObjectMenu()
+        {
+            // Set menu states
+            m_initialMenu = false;
+            m_selectObjectMenu = true;
+            m_scaleObjectMenu = false;
+            IsPaused = true;
+
+            // Show only select object panel
+            m_initialPanel.SetActive(false);
+            m_selectObjectPanel.SetActive(true);
+            m_scaleObjectPanel.SetActive(false);
+            m_noPermissionPanel.SetActive(false);
+            m_loadingPanel.SetActive(false);
+        }
+
+        private void SelectObjectMenuUpdate()
+        {
+            // Check for trigger press on one controller
+            if (OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger) ||
+                OVRInput.GetUp(OVRInput.RawButton.LIndexTrigger) ||
+                Input.GetKeyUp(KeyCode.Space))  // For testing in editor
+            {
+                m_buttonSound?.Play();
+                OnScaleObjectMenu();
+            }
+        }
+        #endregion
+
+        #region Ui state: Scale Object Menu
+        private void OnScaleObjectMenu()
+        {
+            // Set menu states
+            m_initialMenu = false;
+            m_selectObjectMenu = false;
+            m_scaleObjectMenu = true;
+            IsPaused = true;
+
+            // Show only scale object panel
+            m_initialPanel.SetActive(false);
+            m_selectObjectPanel.SetActive(false);
+            m_scaleObjectPanel.SetActive(true);
+            m_noPermissionPanel.SetActive(false);
+            m_loadingPanel.SetActive(false);
+        }
+
+        private void ScaleObjectMenuUpdate()
+        {
+            // Check for triggers on both controllers
+            if ((OVRInput.Get(OVRInput.RawButton.RIndexTrigger) &&
+                 OVRInput.Get(OVRInput.RawButton.LIndexTrigger)) ||
+                 Input.GetKeyDown(KeyCode.B))  // For testing in editor - changed to GetKeyDown
+            {
+                m_buttonSound?.Play();
+                OnDetectionMode();
             }
         }
 
-        private void OnPauseMenu(bool visible)
+        private void OnDetectionMode()
         {
+            // Set menu states
             m_initialMenu = false;
-            IsPaused = visible;
+            m_selectObjectMenu = false;
+            m_scaleObjectMenu = false;
+            IsPaused = false;  // Start detection
 
+            // Hide all menu panels
             m_initialPanel.SetActive(false);
+            m_selectObjectPanel.SetActive(false);
+            m_scaleObjectPanel.SetActive(false);
             m_noPermissionPanel.SetActive(false);
-            m_pressableButton.SetActive(true);
+            m_loadingPanel.SetActive(false);
 
-            OnPause?.Invoke(visible);
+            OnPause?.Invoke(false);  // Start the detection system
         }
         #endregion
 
@@ -157,6 +250,10 @@ namespace PassthroughCameraSamples.MultiObjectDetection
             }
             UpdateLabelInformation();
         }
+        #endregion
+
+        #region REMOVED: Old OnPauseMenu - No longer needed
+        // The old OnPauseMenu method has been replaced by the new workflow
         #endregion
     }
 }

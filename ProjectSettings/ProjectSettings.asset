@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: KevinKuo
-  productName: Indoor3DXLv15_button3
+  productName: Indoor3DXLv16
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -167,7 +167,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.KevinKuo.Indoor3DXLv15_button3
+    Android: com.KevinKuo.Indoor3DXLv16
     Standalone: com.VRChallenge.VRStarter
   buildNumber:
     Standalone: 0
